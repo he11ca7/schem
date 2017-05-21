@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/ic.png</file>
+        <file>res/x.png</file>
+        <file>res/gnd.png</file>
+        <file>res/v.png</file>
+        <file>res/usb.png</file>
+        <file>res/0.png</file>
+        <file>res/1.png</file>
+        <file>res/trash.png</file>
+    </qresource>
+</RCC>
