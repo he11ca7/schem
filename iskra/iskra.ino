@@ -20,6 +20,8 @@ void loop()
 
   delay(LOOP_TIMEOUT);
 
+  // TODO Сделать возможным вызывать части протокола внутри протокола
+
   Errors code = Iskra::serialGet(command, pin);
   switch (code)
     {

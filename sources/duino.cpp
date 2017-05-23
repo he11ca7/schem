@@ -37,6 +37,8 @@ void Duino::slotConfigureChip(
 {
   for(int i = PINS_BEGIN; i <= PINS_END; ++i)
     slotSetState((Pins) i, chip->pin((Pins) i)._type);
+
+  // TODO После завершения конфигурации необходимо запросить состояние выходов
 }
 
 bool Duino::serialConnect(
@@ -94,8 +96,6 @@ void Duino::slotSetState(
 
 void Duino::serialParseIn()
 {
-  CommandsDuino command;
-
   qint64 available = bytesAvailable();
   if(available >= 2)
     {
@@ -108,29 +108,32 @@ void Duino::serialParseIn()
 
       if (char0 >= COMMANDS_DUINO_BEGIN &&
           char0 <= COMMANDS_DUINO_END)
-        command = (CommandsDuino) char0;
+        {
+          CommandsDuino command = (CommandsDuino) char0;
+
+          if(command == COM_ERROR)
+            {
+              if (char1 >= ERRORS_BEGIN &&
+                  char1 <= ERRORS_END)
+                emit signalError((Errors) char1);
+              else
+                emit signalErrorInternal();
+            }
+          else
+            {
+              if (char1 >= PINS_BEGIN &&
+                  char1 <= PINS_END)
+                {
+                  emit serialGet(command, (Pins) char1);
+                  parseSlots(command, (Pins) char1);
+                }
+              else
+                emit signalErrorInternal();
+            }
+        }
       else
         emit signalErrorInternal();
 
-      if(command == COM_ERROR)
-        {
-          if (char1 >= ERRORS_BEGIN &&
-              char1 <= ERRORS_END)
-            emit signalError((Errors) char1);
-          else
-            emit signalErrorInternal();
-        }
-      else
-        {
-          if (char1 >= PINS_BEGIN &&
-              char1 <= PINS_END)
-            {
-              emit serialGet(command, (Pins) char1);
-              parseSlots(command, (Pins) char1);
-            }
-          else
-            emit signalErrorInternal();
-        }
       if(bytesAvailable())
         serialParseIn();
     }

@@ -14,7 +14,7 @@ int main(
   //  QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 
   QApplication a(argc, argv);
-  // QApplication::setStyle(QStyleFactory::create("fusion")); // fusion windowsxp
+  QApplication::setStyle(QStyleFactory::create("fusion")); // fusion windowsxp
 
   QDir current = QDir(QCoreApplication::applicationDirPath());
   current.cdUp();

@@ -24,7 +24,7 @@ void LoggerWidget::addItem(
   QListWidgetItem *item = new QListWidgetItem;
   item->setText(text);
 
-  Qt::GlobalColor color;
+  Qt::GlobalColor color = Qt::transparent;
   switch (code)
     {
     case CODE_REGULAR:  color = Qt::lightGray; break;

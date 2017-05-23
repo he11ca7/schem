@@ -169,6 +169,7 @@ void Window::createUI()
 
   setWindowTitle("Schem");
   setWindowIcon(QIcon("://res/ic.png"));
+  setContentsMargins(16, 16, 16, 16);
   resize(800, 640);
 
   slotLoadChip();
@@ -266,6 +267,7 @@ void Window::slotLoadChip()
                   }
 
                 widgetChipSelector->addChip(chip);
+                widgetLogger->addItem(QString("Добавлена МС: ") + chip->_name);
               }
         }
       file.close();
