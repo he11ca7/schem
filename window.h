@@ -20,6 +20,7 @@
 #include "chip_widget.h"
 #include "chip_selector_widget.h"
 #include "chip.h"
+#include "test_widget.h"
 #include "pin.h"
 
 class Window : public QMainWindow
@@ -35,10 +36,12 @@ private:
   LoggerWidget *widgetLogger;
   ChipWidget *widgetChip;
   ChipSelectorWidget *widgetChipSelector;
+  TestWidget *widgetTest;
 
   QDockWidget *dockChipSelector;
   QDockWidget *dockDuino;
   QDockWidget *dockLogger;
+  QDockWidget *dockTest;
 
   void createUI();
 

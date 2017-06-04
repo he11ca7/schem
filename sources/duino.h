@@ -12,7 +12,7 @@
 #include "protocol.h"
 
 #define TIMEOUT_READYREAD 100  // Таймаут ожидания недостающих данных
-#define TIMEOUT_PARSE 16       // Таймаут отправки сообщений в Duino
+#define TIMEOUT_PARSE 32       // Таймаут отправки сообщений в Duino
 
 /*!
  * \brief Интерфейс обмена Duino <--> PC

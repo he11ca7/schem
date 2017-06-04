@@ -1,20 +1,32 @@
 #include "logger_widget.h"
 
-void LoggerWidget::mousePressEvent(
-    QMouseEvent *event)
+void LoggerWidget::createUI()
 {
-  if(event->button() == Qt::RightButton)
-    menu->popup(event->globalPos());
-  else
-    QListWidget::mousePressEvent(event);
+  _list = new QListWidget;
+  _buttonClear = new QPushButton("Очистить...");
+  connect(_buttonClear,
+          SIGNAL(clicked(bool)),
+          _list,
+          SLOT(clear())
+          );
+
+  QVBoxLayout *layout = new QVBoxLayout;
+  layout->addWidget(_list);
+  layout->addWidget(_buttonClear);
+  setLayout(layout);
 }
 
 LoggerWidget::LoggerWidget(
     QWidget *parent) :
-  QListWidget(parent)
+  QGroupBox("", parent)
 {  
-  menu = new QMenu(this);
-  menu->addAction(QIcon("://res/trash.png"), "Очистить...", this, SLOT(clear()));
+  createUI();
+}
+
+void LoggerWidget::addItem(
+    QString text)
+{
+  addItem(text, CODE_REGULAR);
 }
 
 void LoggerWidget::addItem(
@@ -33,7 +45,7 @@ void LoggerWidget::addItem(
     }
 
   item->setBackgroundColor(QColor(color));
-  insertItem(0, item);
+  _list->insertItem(0, item);
 }
 
 void LoggerWidget::slotSerialConnected()

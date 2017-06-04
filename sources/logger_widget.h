@@ -1,5 +1,9 @@
 #pragma once
 
+#include <QWidget>
+#include <QGroupBox>
+#include <QLayout>
+#include <QPushButton>
 #include <QListWidget>
 #include <QMenu>
 #include <QMouseEvent>
@@ -10,16 +14,16 @@
 /*!
  * \brief Виджет логера
  */
-class LoggerWidget : public QListWidget
+class LoggerWidget : public QGroupBox
 {
   Q_OBJECT
 
 private:
 
-  QMenu *menu;
+  QListWidget *_list;
+  QPushButton *_buttonClear;
 
-  virtual void mousePressEvent(
-      QMouseEvent *event);
+  void createUI();
 
 public:
 
@@ -33,9 +37,13 @@ public:
     CODE_CRITICAL
   };
 
+public slots:
+
+  void addItem(
+      QString text);
   void addItem(
       QString text,
-      LoggerCodes code = CODE_REGULAR);
+      LoggerCodes code);
 
 private slots:
 

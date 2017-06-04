@@ -2,6 +2,24 @@
 
 void DuinoWidget::createUI()
 {
+  comboCommands = new QComboBox;
+  for(int i = COMMANDSPC_BEGIN; i <= COMMANDSPC_END; ++i)
+    comboCommands->addItem(CommandName((CommandsPC) i), i);
+  comboCommands->insertSeparator(2);
+  comboCommands->insertSeparator(8);
+  comboPins = new QComboBox;
+  for(int i = PINS_BEGIN; i <= PINS_END; ++i)
+    comboPins->addItem(QString("Пин #%1").arg(i), i);
+  buttonSend = new QPushButton("Отправить");
+  connect(buttonSend, SIGNAL(clicked(bool)), this, SLOT(buttonSendClicked()));
+  QVBoxLayout *groupCommandsLayout = new QVBoxLayout;
+  groupCommandsLayout->addWidget(comboCommands);
+  groupCommandsLayout->addWidget(comboPins);
+  groupCommandsLayout->addWidget(buttonSend);
+  QGroupBox *groupCommands = new QGroupBox("Команды");
+  groupCommands->setLayout(groupCommandsLayout);
+  groupCommands->hide();
+
   comboConnections = new QComboBox;
   connect(comboConnections,
           SIGNAL(currentIndexChanged(int)),
@@ -28,28 +46,21 @@ void DuinoWidget::createUI()
           this,
           SIGNAL(signalSerialDisconnect())
           );
+  buttonExtra = new QPushButton("Дополнительно...");
+  buttonExtra->setCheckable(true);
+  connect(buttonExtra,
+          SIGNAL(toggled(bool)),
+          groupCommands,
+          SLOT(setVisible(bool))
+          );
   QGridLayout *groupConnectionsLayout = new QGridLayout;
   groupConnectionsLayout->addWidget(comboConnections, 0, 0);
   groupConnectionsLayout->addWidget(buttonRefresh,    0, 1);
   groupConnectionsLayout->addWidget(buttonConnect,    1, 0, 1, 2);
   groupConnectionsLayout->addWidget(buttonDisconnect, 2, 0, 1, 2);
+  groupConnectionsLayout->addWidget(buttonExtra,      3, 0, 1, 2);
   QGroupBox *groupConnections = new QGroupBox("Соединение");
   groupConnections->setLayout(groupConnectionsLayout);
-
-  comboCommands = new QComboBox;
-  for(int i = COMMANDSPC_BEGIN; i <= COMMANDSPC_END; ++i)
-    comboCommands->addItem(CommandName((CommandsPC) i), i);
-  comboPins = new QComboBox;
-  for(int i = PINS_BEGIN; i <= PINS_END; ++i)
-    comboPins->addItem(QString("Пин #%1").arg(i), i);
-  buttonSend = new QPushButton("Отправить");
-  connect(buttonSend, SIGNAL(clicked(bool)), this, SLOT(buttonSendClicked()));
-  QVBoxLayout *groupCommandsLayout = new QVBoxLayout;
-  groupCommandsLayout->addWidget(comboCommands);
-  groupCommandsLayout->addWidget(comboPins);
-  groupCommandsLayout->addWidget(buttonSend);
-  QGroupBox *groupCommands = new QGroupBox("Команды");
-  groupCommands->setLayout(groupCommandsLayout);
 
   QGridLayout *layout = new QGridLayout;
   layout->addWidget(groupConnections, 0, 0);

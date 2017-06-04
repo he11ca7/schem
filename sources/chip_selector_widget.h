@@ -27,8 +27,7 @@ private:
 
 private slots:
 
-  void slotButtonSelectClicked(
-      bool toggled);
+  void slotButtonSelectClicked();
   void slotComboChipsIndexChanged(
       int index);
 

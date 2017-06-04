@@ -21,18 +21,15 @@ Window::~Window()
 
 void Window::createUI()
 {
-  // Меню
-
-  //  QAction *_actionLoadChip = new QAction("Перезагрузить микросхемы", this);
-  //  connect(_actionLoadChip,
+  //  QAction *_actionExit = new QAction("Закрыть", this);
+  //  connect(_actionExit,
   //          SIGNAL(triggered(bool)),
   //          this,
-  //          SLOT(slotLoadChip())
+  //          SLOT(close())
   //          );
-
-  //  QMenu *_menuView = new QMenu("Данные");
-  //  _menuView->addAction(_actionLoadChip);
-  //  menuBar()->addMenu(_menuView);
+  //  QMenu *_menuFile = new QMenu("Файл");
+  //  _menuFile->addAction(_actionExit);
+  //  menuBar()->addMenu(_menuFile);
 
   //  QToolButton *buttonReloadChip = new QToolButton;
   //  buttonReloadChip->setIcon(QIcon("://res/ic.png"));
@@ -72,7 +69,6 @@ void Window::createUI()
           widgetDuino,
           SLOT(slotSerialDisconnected())
           );
-
 
   //---------
   // Выбор МС
@@ -115,11 +111,33 @@ void Window::createUI()
           widgetLogger,
           SLOT(slotSerialErrorInternal())
           );
+
+  //-------
+  // Тестер
+  //-------
+
+  widgetTest = new TestWidget;
+  connect(_duino,
+          SIGNAL(signalSetValue(Pins,bool)),
+          widgetTest,
+          SLOT(slotSetValue(Pins,bool))
+          );
+  connect(widgetTest,
+          SIGNAL(signalLog(QString)),
+          widgetLogger,
+          SLOT(addItem(QString))
+          );
+
   //----
   // Чип
   //----
 
+  Chip *chipEmpty = new Chip("Не задана МС", "Нет описания");
+  for(int i = PINS_BEGIN; i <= PINS_END; ++i)
+    chipEmpty->addPin((Pins) i, Pin(STATE_IN, QString("%1").arg(i), "?"));
+
   widgetChip = new ChipWidget;
+  widgetChip->updateUI(chipEmpty);
   connect(_duino,
           SIGNAL(signalSetValue(Pins,bool)),
           widgetChip,
@@ -149,28 +167,35 @@ void Window::createUI()
   widget->setLayout(layout);
   setCentralWidget(widget);
 
-  dockDuino = new QDockWidget("Duino");
-  dockDuino->setContentsMargins(0, 16, 0, 0);
+  dockDuino = new QDockWidget("Управление");
+  dockDuino->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetVerticalTitleBar);
   dockDuino->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
   dockDuino->setWidget(widgetDuino);
 
-  dockChipSelector = new QDockWidget("IC");
-  dockChipSelector->setContentsMargins(0, 16, 0, 0);
+  dockChipSelector = new QDockWidget("Настройки МС");
+  dockChipSelector->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetVerticalTitleBar);
   dockChipSelector->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
   dockChipSelector->setWidget(widgetChipSelector);
 
-  dockLogger = new QDockWidget("Log");
-  dockLogger->setContentsMargins(0, 16, 0, 0);
+  dockLogger = new QDockWidget("Лог");
+  dockLogger->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetVerticalTitleBar);
+  dockLogger->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
   dockLogger->setWidget(widgetLogger);
+
+  dockTest = new QDockWidget("Тестирование");
+  dockTest->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetVerticalTitleBar);
+  dockTest->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+  dockTest->setWidget(widgetTest);
 
   addDockWidget(Qt::LeftDockWidgetArea, dockDuino);
   addDockWidget(Qt::LeftDockWidgetArea, dockChipSelector);
-  addDockWidget(Qt::RightDockWidgetArea, dockLogger);
+  addDockWidget(Qt::LeftDockWidgetArea, dockLogger);
+  addDockWidget(Qt::RightDockWidgetArea, dockTest);
 
   setWindowTitle("Schem");
   setWindowIcon(QIcon("://res/ic.png"));
   setContentsMargins(16, 16, 16, 16);
-  resize(800, 640);
+  resize(1024, 768);
 
   slotLoadChip();
 }
@@ -179,8 +204,8 @@ void Window::slotLoadChip()
 {
   QDir dir(G_PATH + G_PATH_DATA);
   dir.setFilter(QDir::Files | QDir::NoSymLinks);
-  dir.setSorting(QDir::Time);
-  dir.setNameFilters(QStringList() << "*.xml");
+  dir.setSorting(QDir::Time | QDir::Reversed);
+  dir.setNameFilters(QStringList() << "*.chip");
 
   QFileInfoList list = dir.entryInfoList();
   foreach (QFileInfo info, list)

@@ -1,6 +1,6 @@
 QT += core gui widgets serialport
 CONFIG += c++11
-TARGET = schem_pc
+TARGET = schem
 TEMPLATE = app
 OBJECTS_DIR = obj
 MOC_DIR = moc
@@ -20,7 +20,8 @@ SOURCES += \
     sources/logger_widget.cpp \
     sources/globals.cpp \
     sources/pin_widget.cpp \
-    sources/chip_selector_widget.cpp
+    sources/chip_selector_widget.cpp \
+    sources/test_widget.cpp
 
 HEADERS += \
     window.h \
@@ -35,7 +36,8 @@ HEADERS += \
     sources/logger_widget.h \
     sources/globals.h \
     sources/pin_widget.h \
-    sources/chip_selector_widget.h
+    sources/chip_selector_widget.h \
+    sources/test_widget.h
 
 RESOURCES += \
     res.qrc

@@ -102,3 +102,5 @@ enum Errors
 
   ERRORS_END = ERROR_ILLEGAL_COMMAND
 };
+
+// TODO Ввести команду, инициирующую оповещение Duino о состоянии всех пинов

@@ -29,6 +29,7 @@ private:
   *buttonRefresh,
   *buttonConnect,
   *buttonDisconnect,
+  *buttonExtra,
   *buttonSend;
 
   void createUI();
