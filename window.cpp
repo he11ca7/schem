@@ -112,22 +112,6 @@ void Window::createUI()
           SLOT(slotSerialErrorInternal())
           );
 
-  //-------
-  // Тестер
-  //-------
-
-  widgetTest = new TestWidget;
-  connect(_duino,
-          SIGNAL(signalSetValue(Pins,bool)),
-          widgetTest,
-          SLOT(slotSetValue(Pins,bool))
-          );
-  connect(widgetTest,
-          SIGNAL(signalLog(QString)),
-          widgetLogger,
-          SLOT(addItem(QString))
-          );
-
   //----
   // Чип
   //----
@@ -159,9 +143,45 @@ void Window::createUI()
           SLOT(updateUI(Chip*))
           );
 
+  widgetUGO = new UGOWidget;
+  connect(widgetChipSelector,
+          SIGNAL(signalUGOSelected(Chip*,UGO*)),
+          widgetUGO,
+          SLOT(updateUI(Chip*,UGO*))
+          );
+  connect(_duino,
+          SIGNAL(signalSetValue(Pins,bool)),
+          widgetUGO,
+          SLOT(slotSetValue(Pins,bool))
+          );
+  connect(_duino,
+          SIGNAL(signalSetState(Pins,States)),
+          widgetUGO,
+          SLOT(slotSetState(Pins,States))
+          );
+  connect(widgetUGO,
+          SIGNAL(signalSetValue(Pins,bool)),
+          _duino,
+          SLOT(slotSetValue(Pins,bool))
+          );
+  // DEBUG
+  // TODO Ввести XML-парсер УГО
+  UGO *_tempUGO1 = new UGO("К555ИД7");
+  _tempUGO1->addPins(QList<int>() << 0 << 1 << 2 << 5 << 3 << 4, UGO::LEFT);
+  _tempUGO1->addPins(QList<int>() << 14 << 13 << 12 << 11 << 10 << 9 << 8 << 6, UGO::RIGHT);
+  _tempUGO1->addLimiters(QList<int>() << 3, UGO::LEFT);
+  widgetChipSelector->addUGO(_tempUGO1);
+  UGO *_tempUGO2 = new UGO("КР1533ИЕ7");
+  _tempUGO2->addPins(QList<int>() << 4 << 3 << 14 << 0 << 9 << 8 << 10 << 13, UGO::LEFT);
+  _tempUGO2->addPins(QList<int>() << 11 << 12 << 2 << 1 << 5 << 6, UGO::RIGHT);
+  _tempUGO2->addLimiters(QList<int>() << 1 << 2 << 7, UGO::LEFT);
+  _tempUGO2->addLimiters(QList<int>() << 2, UGO::RIGHT);
+  widgetChipSelector->addUGO(_tempUGO2);
+
   QHBoxLayout *layout = new QHBoxLayout;
   layout->addStretch();
   layout->addWidget(widgetChip);
+  layout->addWidget(widgetUGO);
   layout->addStretch();
   QWidget *widget = new QWidget;
   widget->setLayout(layout);
@@ -182,15 +202,9 @@ void Window::createUI()
   dockLogger->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
   dockLogger->setWidget(widgetLogger);
 
-  dockTest = new QDockWidget("Тестирование");
-  dockTest->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetVerticalTitleBar);
-  dockTest->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-  dockTest->setWidget(widgetTest);
-
   addDockWidget(Qt::LeftDockWidgetArea, dockDuino);
   addDockWidget(Qt::LeftDockWidgetArea, dockChipSelector);
-  addDockWidget(Qt::LeftDockWidgetArea, dockLogger);
-  addDockWidget(Qt::RightDockWidgetArea, dockTest);
+  addDockWidget(Qt::RightDockWidgetArea, dockLogger);
 
   setWindowTitle("Schem");
   setWindowIcon(QIcon("://res/ic.png"));

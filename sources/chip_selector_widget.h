@@ -6,6 +6,7 @@
 #include <QLayout>
 #include <QList>
 #include "chip.h"
+#include "ugo.h"
 #include "duino.h"
 
 /*!
@@ -18,6 +19,7 @@ class ChipSelectorWidget : public QGroupBox
 private:
 
   QList<Chip *> _listChips;
+  QList<UGO *> _listUGOs;
 
   QComboBox *comboChips;
   QPushButton *buttonSelect;
@@ -38,9 +40,14 @@ public:
 
   void addChip(
       Chip *chip);
+  void addUGO(
+      UGO *ugo);
 
 signals:
 
   void signalChipSelected(
       Chip *chip);
+  void signalUGOSelected(
+      Chip *chip,
+      UGO *ugo);
 };

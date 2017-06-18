@@ -17,10 +17,11 @@
 #include "duino.h"
 #include "duino_widget.h"
 #include "logger_widget.h"
+#include "ugo.h"
+#include "ugo_widget.h"
 #include "chip_widget.h"
 #include "chip_selector_widget.h"
 #include "chip.h"
-#include "test_widget.h"
 #include "pin.h"
 
 class Window : public QMainWindow
@@ -35,8 +36,9 @@ private:
   DuinoWidget *widgetDuino;
   LoggerWidget *widgetLogger;
   ChipWidget *widgetChip;
+  UGOWidget *widgetUGO;
+
   ChipSelectorWidget *widgetChipSelector;
-  TestWidget *widgetTest;
 
   QDockWidget *dockChipSelector;
   QDockWidget *dockDuino;

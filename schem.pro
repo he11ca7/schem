@@ -21,7 +21,8 @@ SOURCES += \
     sources/globals.cpp \
     sources/pin_widget.cpp \
     sources/chip_selector_widget.cpp \
-    sources/test_widget.cpp
+    sources/ugo.cpp \
+    sources/ugo_widget.cpp
 
 HEADERS += \
     window.h \
@@ -37,7 +38,8 @@ HEADERS += \
     sources/globals.h \
     sources/pin_widget.h \
     sources/chip_selector_widget.h \
-    sources/test_widget.h
+    sources/ugo.h \
+    sources/ugo_widget.h
 
 RESOURCES += \
     res.qrc
