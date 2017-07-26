@@ -12,12 +12,12 @@
 
 ## Аппаратная часть
 
-![Shield](https://github.com/he11ca7/schem/blob/master/pic/ShieldWDuino.JPG)
+![](https://github.com/he11ca7/schem/blob/master/pic/ShieldWDuino.JPG)
 
 Аппаратная часть представляет из себя плату в формате Arduino Shield.
 Выводы ZIF-панели продублированы с обеих сторон платы-расширения. Это позволяет легко конфигурировать плату-расширение под любую расстановку контактов МС типов корпусов DIP14 и DIP16 посредством установки перемычек в контактные колодки. 
 
-![PCB](https://github.com/he11ca7/schem/blob/master/pic/arduino-proto-shield-pcb.png)
+![](https://github.com/he11ca7/schem/blob/master/pic/arduino-proto-shield-pcb.png)
 
 На данной схеме плата-расширение сконфигурирована под микросхемы в корпусе DIP16 с характерным для серии 1533 расположением выводов питания.
 
@@ -91,13 +91,13 @@ const int Iskra::_config[] =
 
 Перед началом управления выполняется выбор предзагруженного описания МС из списка.
 
-![Установка соединения и прошивка](https://github.com/he11ca7/schem/blob/master/pic/Patch.gif)
+![](https://github.com/he11ca7/schem/blob/master/pic/Patch.gif)
 
 ## Управление
 
 Управление МС может осуществляться как посредством интерфейса МС, так и посредством интерфейса УГО. При этом интерфейсы синхронизируются.
 
-![Управление](https://github.com/he11ca7/schem/blob/master/pic/Control.gif)
+![](https://github.com/he11ca7/schem/blob/master/pic/Control.gif)
 
 ## Ограничения
 
