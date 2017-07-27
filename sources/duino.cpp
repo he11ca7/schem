@@ -139,7 +139,7 @@ void Duino::serialParseIn()
     }
   else
     if(available == 1)
-      // Ждём
+      // Ждать
       {
         if(waitForReadyRead(TIMEOUT_READYREAD))
           serialParseIn();

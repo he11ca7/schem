@@ -21,24 +21,6 @@ Window::~Window()
 
 void Window::createUI()
 {
-  //  QAction *_actionExit = new QAction("Закрыть", this);
-  //  connect(_actionExit,
-  //          SIGNAL(triggered(bool)),
-  //          this,
-  //          SLOT(close())
-  //          );
-  //  QMenu *_menuFile = new QMenu("Файл");
-  //  _menuFile->addAction(_actionExit);
-  //  menuBar()->addMenu(_menuFile);
-
-  //  QToolButton *buttonReloadChip = new QToolButton;
-  //  buttonReloadChip->setIcon(QIcon("://res/ic.png"));
-  //  buttonReloadChip->setText("Перезагрузить данные микросхем");
-  //  buttonReloadChip->setToolTip("Перезагрузить данные микросхем");
-  //  connect(buttonReloadChip, SIGNAL(clicked(bool)), this, SLOT(slotLoadChip()));
-  //  QToolBar *barData = addToolBar("Данные");
-  //  barData->addWidget(buttonReloadChip);
-
   //-----------
   // Соединения
   //-----------

@@ -13,7 +13,7 @@ INCLUDEPATH += \
 SOURCES += \
     main.cpp\
     window.cpp \
-    # iskra/iskra.cpp \
+    # iskra/iskra.cpp \ # Duino
     sources/chip_widget.cpp \
     sources/duino.cpp \
     sources/duino_widget.cpp \
@@ -28,7 +28,7 @@ HEADERS += \
     window.h \
     iskra/protocol.h \
     iskra/iskra.ino \
-    # iskra/iskra.h \
+    # iskra/iskra.h \ # Duino
     sources/chip.h \
     sources/chip_widget.h \
     sources/duino.h \

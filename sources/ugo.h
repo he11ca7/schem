@@ -10,35 +10,35 @@ class UGO
 {
 private:
 
-    QList<int>
-    _listPinsLeft,
-    _listPinsRight,
-    _listLimitersLeft,
-    _listLimitersRight;
+  QList<int>
+  _listPinsLeft,
+  _listPinsRight,
+  _listLimitersLeft,
+  _listLimitersRight;
 
 public:
 
-    QString _name;
+  QString _name;
 
-    enum Positions
-    {
-        LEFT,
-        RIGHT
-    };
+  enum Positions
+  {
+    LEFT,
+    RIGHT
+  };
 
-    UGO(
-            QString name) :
-        _name(name)
-    {}
+  UGO(
+      QString name) :
+    _name(name)
+  {}
 
-    void addPins(
-            QList<int> pins,
-            Positions position);
-    void addLimiters(
-            QList<int> limiters,
-            Positions position);
-    QList<int> pins(
-        Positions position);
-    QList<int> limiters(
-        Positions position);
+  void addPins(
+      QList<int> pins,
+      Positions position);
+  void addLimiters(
+      QList<int> limiters,
+      Positions position);
+  QList<int> pins(
+      Positions position);
+  QList<int> limiters(
+      Positions position);
 };

@@ -1,33 +1,33 @@
 #include "ugo.h"
 
 void UGO::addPins(
-        QList<int> pins,
-        UGO::Positions position)
+    QList<int> pins,
+    UGO::Positions position)
 {
-    switch (position)
+  switch (position)
     {
     case LEFT:
-        _listPinsLeft.append(pins);
-        break;
+      _listPinsLeft.append(pins);
+      break;
     case RIGHT:
-        _listPinsRight.append(pins);
-        break;
+      _listPinsRight.append(pins);
+      break;
     default: break;
     }
 }
 
 void UGO::addLimiters(
-        QList<int> limiters,
-        UGO::Positions position)
+    QList<int> limiters,
+    UGO::Positions position)
 {
-    switch (position)
+  switch (position)
     {
     case LEFT:
-        _listLimitersLeft.append(limiters);
-        break;
+      _listLimitersLeft.append(limiters);
+      break;
     case RIGHT:
-        _listLimitersRight.append(limiters);
-        break;
+      _listLimitersRight.append(limiters);
+      break;
     default: break;
     }
 }

@@ -7,14 +7,14 @@ QString CommandName(
 {
   switch (command)
     {
-    case COM_VAL_0:       return "0";
-    case COM_VAL_1:       return "1";
-    case COM_GET_UNUSED:  return "Не задействован";
-    case COM_GET_V:       return "Питание";
-    case COM_GET_GND:     return "Земля";
-    case COM_GET_IN:      return "Вход";
-    case COM_GET_OUT:     return "Выход";
-    case COM_ERROR:       return "Ошибка";
+    case COM_VAL_0:      return "0";
+    case COM_VAL_1:      return "1";
+    case COM_GET_UNUSED: return "Не задействован";
+    case COM_GET_V:      return "Питание";
+    case COM_GET_GND:    return "Земля";
+    case COM_GET_IN:     return "Вход";
+    case COM_GET_OUT:    return "Выход";
+    case COM_ERROR:      return "Ошибка";
     default: return "";
     }
 }
@@ -24,15 +24,15 @@ QString CommandName(
 {
   switch (command)
     {
-    case COM_SET_0:         return "Установить 0";
-    case COM_SET_1:         return "Установить 1";
-    case COM_DEF_UNUSED:    return "Задать неиспользуемый";
-    case COM_DEF_V:         return "Задать питание";
-    case COM_DEF_GND:       return "Задать землю";
-    case COM_DEF_IN:        return "Задать вход";
-    case COM_DEF_OUT:       return "Задать выход";
-    case COM_SET:           return "Запросить значение";
-    case COM_DEF:           return "Запросить тип";
+    case COM_SET_0:      return "Установить 0";
+    case COM_SET_1:      return "Установить 1";
+    case COM_DEF_UNUSED: return "Задать неиспользуемый";
+    case COM_DEF_V:      return "Задать питание";
+    case COM_DEF_GND:    return "Задать землю";
+    case COM_DEF_IN:     return "Задать вход";
+    case COM_DEF_OUT:    return "Задать выход";
+    case COM_SET:        return "Запросить значение";
+    case COM_DEF:        return "Запросить тип";
     default: return "";
     }
 }
@@ -42,12 +42,12 @@ QString ErrorName(
 {
   switch (code)
     {
-    case ERROR_SUCCESS:          return "Успех";
-    case ERROR_UNKNOWN_COMMAND:  return "Неизвестная команда";
-    case ERROR_UNKNOWN_PIN:      return "Неизвестный пин";
-    case ERROR_SERIAL_DEFICIT:   return "Данных недостаточно";
-    case ERROR_SERIAL_INTERNAL:  return "Внутренняя ошибка";
-    case ERROR_ILLEGAL_COMMAND:  return "Некорректная попытка чтения/записи";
+    case ERROR_SUCCESS:         return "Успех";
+    case ERROR_UNKNOWN_COMMAND: return "Неизвестная команда";
+    case ERROR_UNKNOWN_PIN:     return "Неизвестный пин";
+    case ERROR_SERIAL_DEFICIT:  return "Данных недостаточно";
+    case ERROR_SERIAL_INTERNAL: return "Внутренняя ошибка";
+    case ERROR_ILLEGAL_COMMAND: return "Некорректная попытка чтения/записи";
     default: return "";
     }
 }
@@ -58,10 +58,10 @@ QString StateName(
   switch (state)
     {
     case STATE_UNUSED: return "STATE_UNUSED";
-    case STATE_V: return "STATE_V";
-    case STATE_GND: return "STATE_GND";
-    case STATE_IN: return "STATE_IN";
-    case STATE_OUT: return "STATE_OUT";
+    case STATE_V:      return "STATE_V";
+    case STATE_GND:    return "STATE_GND";
+    case STATE_IN:     return "STATE_IN";
+    case STATE_OUT:    return "STATE_OUT";
     default: return "";
     }
 }

@@ -92,10 +92,10 @@ void UGOWidget::updateUI(
     }
 
   QList<int>
-  _listPinsLeft = ugo->pins(UGO::LEFT),
-  _listPinsRight = ugo->pins(UGO::RIGHT),
-  _listLimitersLeft = ugo->limiters(UGO::LEFT),
-  _listLimitersRight = ugo->limiters(UGO::RIGHT);
+      _listPinsLeft = ugo->pins(UGO::LEFT),
+      _listPinsRight = ugo->pins(UGO::RIGHT),
+      _listLimitersLeft = ugo->limiters(UGO::LEFT),
+      _listLimitersRight = ugo->limiters(UGO::RIGHT);
 
   for(int i = 0; i < _listPinsLeft.size(); ++i)
     {
